@@ -10,17 +10,13 @@ class Vehicle {
         string name;
         string color;
         int year;
-        int vin;
+        string vin;
 
         static int objectsCount;
 
     public:
-        Vehicle(string name, string color, int year){
-            this->name = name;
-            this->color = color;
-            this->year = year;
-            this->vin = vin;
-            objectsCount++;
+        Vehicle(string name, string color, int year, string vin){
+            setdefaults();
         }
 
         //desctructor
@@ -40,7 +36,7 @@ class Vehicle {
             return year;
         }
 
-        int getVin(){
+        string getVin(){
             return vin;
         }
 
@@ -48,6 +44,43 @@ class Vehicle {
             return objectsCount;
         }
 
+        private:
+
+        void setdefaults(){
+            name = "unknown";
+            color = "unknown";
+            year = 1900;
+            vin = "unknown";
+            objectsCount++;
+        }
+
+        public:
+        //setters
+        void setName(string name){
+            this->name = name;
+        }
+
+        void setColor(string color){
+            this->color = color;
+        }
+
+        void setYear(int year){
+            if (year < 1900 || year > 2025){
+                throw invalid_argument("Invalid production year");
+            }
+            else {
+                this->year = year;
+            }
+        }
+
+        void setVin(string vin){
+            if(vin.length() != 17){
+                throw invalid_argument("Invalid VIN number");
+            }
+            else { 
+                this->vin = vin;
+            }
+        }
 };
 
 
