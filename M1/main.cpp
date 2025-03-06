@@ -18,6 +18,10 @@ class Vehicle {
 
     public:
         //constructor
+        Vehicle(string brand) {
+            setBrand(brand);
+        }
+
         Vehicle(string brand, string color, int year, string vin) {
             setBrand(brand);
             setColor(color);
@@ -93,50 +97,45 @@ int Vehicle::objectsCount = 0;
 int Vehicle::idCounter = 1;
 
 int main() {
-    Vehicle* vehicle[5];
+    try {
+        //static objects
+        Vehicle car1("Toyota", "Red", 2020, "1HGCM82633A123456");
+        Vehicle car2("BMW", "Blue", 2018, "5YJSA1E26JF252345");
 
-    assert(Vehicle::getObjectsCount() == 0);
-    vehicle[0] = new Vehicle("Audi", "Black", 2010, "W23A56D89W12G45FG");
-    vehicle[1] = new Vehicle("BMW", "White", 2015, "W23A56D89W12G45FG");
-    vehicle[2] = new Vehicle("Mercedes", "Red", 2018, "W23A56D89W12G45FG");
-    vehicle[3] = new Vehicle("Toyota", "Blue", 2019, "W23A56D89W12G45FG");
-    vehicle[4] = new Vehicle("Ford", "Green", 2020, "W23A56D89W12G45FG");
-    assert(Vehicle::getObjectsCount() == 5);
+        cout << "Initial objects state:" << endl;
+        cout << car1.toString() << endl;
+        cout << car2.toString() << endl;
 
-    //initialization 
-    assert(vehicle[0]->getBrand() == "Audi");
-    assert(vehicle[0]->getColor() == "Black");
-    assert(vehicle[0]->getYear() == 2010);
-    assert(vehicle[0]->getVin() == "W23A56D89W12G45FG");
+        //setters
+        car1.setColor("Black");
+        car1.setYear(2022);
+        car2.setBrand("Mercedes");
 
-    assert(vehicle[2]->getBrand() == "Mercedes");
-    assert(vehicle[2]->getColor() == "Red");
-    assert(vehicle[2]->getYear() == 2018);
-    assert(vehicle[2]->getVin() == "W23A56D89W12G45FG");
+        cout << "\nAfter state changes:" << endl;
+        cout << car1.toString() << endl;
+        cout << car2.toString() << endl;
 
-    //setters
-    vehicle[0]->setBrand("Audi 100");
-    vehicle[0]->setColor("Black night");
-    vehicle[0]->setYear(2025);
-    vehicle[0]->setVin("WWWWWWWWWWWWWWWWW");
+        //dynamic objects
+        Vehicle* car3 = new Vehicle("Audi", "White", 2021, "WAUZFAFC9JN123456");
+        Vehicle* car4 = new Vehicle("Ford", "Grey", 1924, "1FAFP4448YF123456");
 
-    assert(vehicle[0]->getBrand() == "Audi 100");
-    assert(vehicle[0]->getColor() == "Black night");
-    assert(vehicle[0]->getYear() == 2025);
-    assert(vehicle[0]->getVin() == "WWWWWWWWWWWWWWWWW");
+        cout << "\nDynamic objects state:" << endl;
+        cout << car3->toString() << endl;
+        cout << car4->toString() << endl;
 
-    vehicle[0]->setColor("Black sky");
-    assert(vehicle[0]->getColor() == "Black sky");
+        //counter
+        cout << "\nTotal objects created: " << Vehicle::getObjectsCount() << endl;
 
+        delete car3;
+        delete car4;
 
-    assert(Vehicle::getObjectsCount() == 5);
-    for (int i = 4; i >= 0; i--) {  
-        cout << vehicle[i]->toString() << endl;
-        delete vehicle[i];
-        assert(Vehicle::getObjectsCount() == i);
+        cout << "\nAfter deleting dynamic objects:" << endl;
+        cout << "Total objects remaining: " << Vehicle::getObjectsCount() << endl;
     }
-
-    assert(Vehicle::getObjectsCount() == 0);
+    //cathing invalind vin and production year
+    catch (const exception& e) {
+        cerr << "Exception: " << e.what() << endl;
+    }
 
     return 0;
 }
