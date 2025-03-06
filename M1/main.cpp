@@ -11,7 +11,9 @@ class Vehicle {
         string color;
         int year;
         string vin;
+        int id;
 
+        static int idCounter;
         static int objectsCount;
 
     public:
@@ -21,6 +23,7 @@ class Vehicle {
             setColor(color);
             setYear(year);
             setVin(vin);
+            setId(idCounter);
             objectsCount++;
         }
 
@@ -73,14 +76,21 @@ class Vehicle {
             this->vin = vin;
         }
 
+        void setId(int id) {
+            this->id = id;
+            idCounter++;
+        }
+
         string toString() {
             stringstream output;
-            output << "Brand: " << brand << " | Color: " << color << " | Year: " << year << " | VIN: " << vin;
+            output << "Brand: " << brand << " | Color: " << color << " | Year: " << year << " | VIN: " << vin << " | ID: " << id;
             return output.str();
         }
 };
 
+//intialize static variables
 int Vehicle::objectsCount = 0;
+int Vehicle::idCounter = 1;
 
 int main() {
     Vehicle* vehicle[5];
