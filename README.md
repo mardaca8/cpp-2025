@@ -3,6 +3,27 @@
 ## Uzduotys 
 
 ### M1
-Klase automobilis
+Panaudota esybe automobilis, igyvendinta ja apibrezianti klase.
+
+## 1. Programos funkcionalumas
+
+- [X] Sukurti konstruktorius ir dekonsruktorius
+- [X] Kiekvienas objektas gauna unikalu id
+- [X] Sekamas klases objektu kiekis
+- [X] Istestuotas funkcionalumas
+
+## 2. Programos paleidimas
+
+Programa gali buti paleidziama nuejus i programos kataloga su terminalu:
+
+```
+cd cpp-2025/M1
+./class.o
+```
+
+
+
+
+
 
 
