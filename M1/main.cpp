@@ -33,6 +33,10 @@ class Vehicle {
 
         //default constructor
         Vehicle() {
+            setBrand("Unknown");
+            setColor("Unknown");
+            setYear(2000);
+            setVin("XXXXXXXXXXXXXXXXX");
             setId(idCounter);
             objectsCount++;
         }
@@ -73,7 +77,7 @@ class Vehicle {
         }
 
         void setYear(int year) {
-            if (year < 1900 || year > 2025) {
+            if (year < 1900 || year >= 2025) {
                 throw invalid_argument("Invalid production year");
             }
             this->year = year;
@@ -86,16 +90,17 @@ class Vehicle {
             this->vin = vin;
         }
 
-        void setId(int id) {
-            this->id = id;
-            idCounter++;
-        }
-
         string toString() const {
             stringstream output;
             output << "Brand: " << brand << " | Color: " << color << " | Year: " << year << " | VIN: " << vin << " | ID: " << id;
             return output.str();
         }
+
+        private:
+            void setId(int id) {
+                this->id = id;
+                idCounter++;
+            }
 };
 
 //intialize static variables
@@ -131,7 +136,7 @@ int main() {
             new Vehicle("Audi", "White", 2019, "1HGCM82633A123456"),
             new Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345")
         };
-
+ 
         Vehicle* cars2 = new Vehicle[size];
         cars2[0] = Vehicle("Audi", "White", 2019, "1HGCM82633A123456");
         cars2[1] = Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345");
@@ -143,7 +148,13 @@ int main() {
         //print dynamic objects
         for(int i = 0; i < size; i++) {
             cout << cars1[i]->toString() << endl;
+        }
+
+        for(int i = 0; i < size; i++) {
             cout << cars2[i].toString() << endl;
+        }
+
+        for(int i = 0; i < size; i++) {
             cout << cars3[i]->toString() << endl;
         }
 
@@ -153,10 +164,11 @@ int main() {
         //delete dynamic objects
         for(int i = 0; i < size; i++) {
             delete cars1[i];
+            delete cars3[i]; //delete each object
         }
 
         delete[] cars2;
-        delete[] cars3;
+        delete[] cars3; //deleate array of pointers
 
         cout << "\nAfter deleting dynamic objects:" << endl;
         cout << "Total objects remaining: " << Vehicle::getObjectsCount() << endl;
