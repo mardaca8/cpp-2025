@@ -31,6 +31,12 @@ class Vehicle {
             objectsCount++;
         }
 
+        //default constructor
+        Vehicle() {
+            setId(idCounter);
+            objectsCount++;
+        }
+
         //destructor
         ~Vehicle() {
             objectsCount--;
@@ -85,7 +91,7 @@ class Vehicle {
             idCounter++;
         }
 
-        string toString() {
+        string toString() const {
             stringstream output;
             output << "Brand: " << brand << " | Color: " << color << " | Year: " << year << " | VIN: " << vin << " | ID: " << id;
             return output.str();
@@ -100,40 +106,57 @@ int main() {
     const int size = 2;
     try {
         //static objects
-        Vehicle car[size] = {
+        Vehicle cars[size] = {
             Vehicle("Toyota", "Red", 2020, "1HGCM82633A123456"), 
             Vehicle("BMW", "Blue", 2018, "5YJSA1E26JF252345")
         };
         
-
         cout << "Initial objects state:" << endl;
-        cout << car[0].toString() << endl;
-        cout << car[1].toString() << endl;
+        cout << cars[0].toString() << endl;
+        cout << cars[1].toString() << endl;
 
         //setters
-        car[0].setColor("Black");
-        car[0].setYear(2022);
-        car[0].setBrand("Mercedes");
+        cars[0].setColor("Black");
+        cars[0].setYear(2022);
+        cars[0].setBrand("Mercedes");
 
         cout << "\nAfter state changes:" << endl;
-        cout << car[1].toString() << endl;
-        cout << car[1].toString() << endl;
+        cout << cars[0].toString() << endl;
+        cout << cars[1].toString() << endl;
 
         //dynamic objects
-        Vehicle* cars[size] = {
+        cout << "\nDynamic objects state:" << endl;
+        
+        Vehicle* cars1[size] = {
             new Vehicle("Audi", "White", 2019, "1HGCM82633A123456"),
             new Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345")
         };
 
-        cout << "\nDynamic objects state:" << endl;
-        cout << cars[0]->toString() << endl;
-        cout << cars[1]->toString() << endl;
+        Vehicle* cars2 = new Vehicle[size];
+        cars2[0] = Vehicle("Audi", "White", 2019, "1HGCM82633A123456");
+        cars2[1] = Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345");
+
+        Vehicle** cars3 = new Vehicle*[size];
+        cars3[0] = new Vehicle("Audi", "White", 2019, "1HGCM82633A123456");
+        cars3[1] = new Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345");
+
+        //print dynamic objects
+        for(int i = 0; i < size; i++) {
+            cout << cars1[i]->toString() << endl;
+            cout << cars2[i].toString() << endl;
+            cout << cars3[i]->toString() << endl;
+        }
 
         //counter
         cout << "\nTotal objects created: " << Vehicle::getObjectsCount() << endl;
 
-        delete cars[0];
-        //delete cars[1];
+        //delete dynamic objects
+        for(int i = 0; i < size; i++) {
+            delete cars1[i];
+        }
+
+        delete[] cars2;
+        delete[] cars3;
 
         cout << "\nAfter deleting dynamic objects:" << endl;
         cout << "Total objects remaining: " << Vehicle::getObjectsCount() << endl;
