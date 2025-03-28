@@ -131,16 +131,19 @@ int main() {
 
         //dynamic objects
         cout << "\nDynamic objects state:" << endl;
-        
+
+        //array of pointers
         Vehicle* cars1[size] = {
             new Vehicle("Audi", "White", 2019, "1HGCM82633A123456"),
             new Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345")
         };
- 
+
+        //array of objects
         Vehicle* cars2 = new Vehicle[size];
         cars2[0] = Vehicle("Audi", "White", 2019, "1HGCM82633A123456");
         cars2[1] = Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345");
-
+        
+        //array of pointers to objects
         Vehicle** cars3 = new Vehicle*[size];
         cars3[0] = new Vehicle("Audi", "White", 2019, "1HGCM82633A123456");
         cars3[1] = new Vehicle("Ford", "Green", 2017, "5YJSA1E26JF252345");

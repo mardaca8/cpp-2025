@@ -11,6 +11,7 @@ Panaudota esybe automobilis, igyvendinta ja apibrezianti klase.
 - [X] Kiekvienas objektas gauna unikalu id
 - [X] Sekamas klases objektu kiekis
 - [X] Istestuotas funkcionalumas
+- [X] Realizuoti keli dinaminiu objektu masyvu sukurimo budai
 
 ## 2. Programos paleidimas
 
