@@ -2,7 +2,7 @@
 
 ## Uzduotys 
 
-### M1
+# M1
 Panaudota esybe automobilis, igyvendinta ja apibrezianti klase.
 
 ## 1. Programos funkcionalumas
@@ -22,7 +22,7 @@ cd cpp-2025/M1
 ./class.o
 ```
 
-### M1
+# M2
 Toliau nudojama esybe automobilis.
 
 ## 1. Programos funkcionalumas
