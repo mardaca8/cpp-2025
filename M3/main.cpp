@@ -31,14 +31,32 @@ int main() {
         cout << cars2[i].toString() << endl;
     }
 
+
+    std::ofstream ofs("vehicle.dat", std::ios::binary);
+    for(int i = 0; i < size; i++) {
+        ofs << cars2[i];
+    }
+    ofs.close();
+
+    Vehicle* loaded = new Vehicle[size];
+    std::ifstream ifs("vehicle.dat", std::ios::binary);
+    for (int i = 0; i < size; i++) {
+        ifs >> loaded[i];
+    }
+    ifs.close();
+
+    for(int i = 0; i < size; i++) {
+        cout << "LOADED:" << loaded[i].toString() << endl;
+    }
+
     //counter
     cout << "\nTotal objects created: " << Vehicle::getObjectsCount() << endl;
 
-    //delete dynamic objects
-    delete[] cars2;
+    // //delete dynamic objects
+    // delete[] cars2;
 
-    cout << "\nAfter deleting dynamic objects:" << endl;
-    cout << "Total objects remaining: " << Vehicle::getObjectsCount() << endl;
+    // cout << "\nAfter deleting dynamic objects:" << endl;
+    // cout << "Total objects remaining: " << Vehicle::getObjectsCount() << endl;
 
     return 0;
 }

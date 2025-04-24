@@ -30,6 +30,9 @@ public:
     void setEngine(class Engine* engine);
     void switchEngine(int type);
 
+    friend std::ostream& operator<<(std::ostream& os, const Vehicle& v);
+    friend std::istream& operator>>(std::istream& is, Vehicle& v);
+
 private:
     VehicleImpl* impl; // Pointer to implementation
 };

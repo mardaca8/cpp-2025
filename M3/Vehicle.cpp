@@ -48,7 +48,7 @@ public:
 
     std::string toString() const {
         std::stringstream ss;
-        ss << "Brand: " << brand << " | Color: " << color << " | Year: " <<  year << " | VIN: " << vin << " | ID: " << id << " | Engine: " << engine->getType();
+        ss << "Brand: " << brand << " | Color: " << color << " | Year: " <<  year << " | VIN: " << vin << " | ID: " << id << " | Engine: " << engine->getType() << " | Horsepower: " << engine->getHorsepower();
         
         return ss.str();
     }
@@ -77,6 +77,42 @@ public:
         delete engine;
         engine = newEngine;
     }
+
+    void save(std::ostream& os) const {
+        int len;
+    
+        len = brand.size();  os.write((char*)&len, sizeof(len)); os.write(brand.c_str(), len);
+        len = color.size();  os.write((char*)&len, sizeof(len)); os.write(color.c_str(), len);
+        os.write((char*)&year, sizeof(year));
+        len = vin.size();    os.write((char*)&len, sizeof(len)); os.write(vin.c_str(), len);
+    
+        engine->save(os);
+    }
+    
+    void load(std::istream& is) {
+        int len;
+        char buffer[256];
+    
+        is.read((char*)&len, sizeof(len)); is.read(buffer, len); buffer[len] = 0; brand = buffer;
+        is.read((char*)&len, sizeof(len)); is.read(buffer, len); buffer[len] = 0; color = buffer;
+        is.read((char*)&year, sizeof(year));
+        is.read((char*)&len, sizeof(len)); is.read(buffer, len); buffer[len] = 0; vin = buffer;
+    
+        // engine type
+        is.read((char*)&len, sizeof(len));
+        is.read(buffer, len); buffer[len] = 0;
+        std::string engineType = buffer;
+    
+        int hp;
+        is.read((char*)&hp, sizeof(hp));
+    
+        delete engine;
+        if (engineType == "Petrol") engine = new PetrolEngine(hp);
+        else if (engineType == "Diesel") engine = new DieselEngine(hp);
+        else if (engineType == "Electric") engine = new ElectricEngine(hp);
+        else engine = new PetrolEngine(hp); // default fallback
+    }
+    
 };
 
 int VehicleImpl::idCounter = 1;
@@ -129,4 +165,14 @@ void Vehicle::setEngine(Engine* engine) {
 
 void Vehicle::switchEngine(int type) {
     impl->switchEngine(type);
+}
+
+std::ostream& operator<<(std::ostream& os, const Vehicle& v) {
+    v.impl->save(os);
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Vehicle& v) {
+    v.impl->load(is);
+    return is;
 }
