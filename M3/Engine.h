@@ -6,15 +6,45 @@
 
 class Engine {
 public:
+    /**
+     * @brief Konstruktorius be parametrų.
+     */
     virtual ~Engine() = default;
 
+    /**
+     * @brief Gauti variklio tipą.
+     * @return Variklio tipas.
+     */
     virtual std::string getType() const = 0;
+
+    /**
+     * @brief Konstruktorius su variklio tipu.
+     * @param type Variklio tipas.
+     */
     virtual Engine* clone() const = 0;
 
+    /**
+     * @brief Gauti variklio galią.
+     * @return Variklio galia.
+     */
     virtual int getHorsepower() const = 0;
+
+    /**
+     * @brief Nustatyti variklio galią.
+     * @param hp Variklio galia.
+     */
     virtual void setHorsepower(int hp) = 0;
 
+    /**
+     * @brief Išsaugoti variklį į binarinį srautą.
+     * @param os Išvesties srautas.
+     */
     virtual void save(std::ostream& os) const = 0;
+
+    /**
+     * @brief Nuskaito variklį iš binarinio srauto.
+     * @param is Įvesties srautas.
+     */
     virtual void load(std::istream& is) = 0;
 };
 

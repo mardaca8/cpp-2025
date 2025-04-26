@@ -1,0 +1,12 @@
+PROJECT_NAME           = VehicleModule
+OUTPUT_DIRECTORY       = docs
+INPUT                  = ./  
+FILE_PATTERNS          = *.h *.cpp
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+GENERATE_LATEX         = YES
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CLASS_DIAGRAMS         = YES
+DOT_IMAGE_FORMAT       = png
+GENERATE_TREEVIEW      = YES
