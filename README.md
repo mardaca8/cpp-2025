@@ -47,6 +47,27 @@ make build
 ./vehicle
 ```
 
+# M3
+Toliau nudojama esybe automobilis.
+
+## 1. Programos funkcionalumas
+
+- [X] klase isskaidyta i dvi dalis - pastovia bei kintama
+- [X] sukurtos 3 skirtingos realizacijos
+- [X] metodas switchEngine() keicia realizacija vykdymo metu
+- [X] klasiu duomenis galima issaugoti binariniame faile, bei juos atkurti
+- [X] parasyta modulio dokumentacija naudojant doxygen (M3/docs.pdf)
+    
+## 2. Programos paleidimas
+
+Programa gali buti paleidziama nuejus i programos kataloga su terminalu:
+
+```
+cd cpp-2025/M3
+make build
+./vehicle
+```
+
 
 
 
